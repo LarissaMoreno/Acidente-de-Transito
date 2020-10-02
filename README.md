@@ -1,6 +1,6 @@
 # Acidente de Trânsito
 
-[alt text](https://github.com/LarissaMoreno/Acidente-de-Transito/blob/main/imagem1.png)
+![alt text](https://github.com/LarissaMoreno/Acidente-de-Transito/blob/main/imagem1.png)
 
 
 **Introdução** 
