@@ -197,6 +197,7 @@ q <- treemap(dados1,
 
 
 ### Tabela
+<div align="center">
 ```{r}
 renderUI({
     table=dados%>%filter(causa_acidente %in% input$causa & ano %in% input$ano1)%>%
@@ -209,7 +210,7 @@ renderUI({
         kable(table))
     })
 ```
-
+</div>
 
 Mapa {data-icon="fa-map-marked-alt"}
 =======================================================================
