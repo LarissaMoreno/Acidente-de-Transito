@@ -37,8 +37,12 @@ Disponibilidade de banco de dados consistentes e que abranjam todas as variávei
 
 ## Colaboradores
 1.Carolina Gomes Casado de Carvalho 
+
 2.Eduardo Leopoldino Gonçalves  
+
 3.Felipe da Rocha Ferreira 
+
 4.Juliana Paula Degani 
+
 5.Larissa Moreno Silva 
 
