@@ -1,5 +1,8 @@
 # Acidente de Trânsito
 
+**Aplicativo**
+Acesse o aplicativo em: [Acidente de Trânsito](https://larissamoreno.shinyapps.io/appp/)
+
 ![alt text](https://github.com/LarissaMoreno/Acidente-de-Transito/blob/main/imagem1.png)
 
 
@@ -7,11 +10,9 @@
 
 Para atingirmos o objetivo de avaliar a qualidade do transito, iremos observar o cenário complementar, por exemplo, ao invés de observarmos pontos positivos sobre o trânsito, iremos observar pontos negativos, como acidentes e mortes. 
 
- 
 
 Segundo o site do CNJ: https://www.cnt.org.br/agencia-cnt/cnt-lanca-painel-sobre-acidentes-rodoviarios-veja-principais-dados " O Brasil registra 14 mortes nas rodovias federais a cada dia". Dados alarmantes que motivaram a escolha desse tema e subtema. 
 
- 
 
 **Objetivos** 
 
@@ -24,19 +25,15 @@ Qualidade no trânsito envolve diversos fatores, nesse projeto iremos dar ênfas
 
 **Recursos necessários**
 
- Dados sobre mortalidade do DataSus,  
+ Dados sobre mortalidade do DataSus: http://tabnet.datasus.gov.br/cgi/tabcgi.exe?sim/cnv/ext10uf.def
 
- Dados sobre os acidentes de trânsito da Polícia Federal 
+ Dados sobre os acidentes de trânsito da Polícia Federal:  https://portal.prf.gov.br/dados-abertos-acidentes 
 
  IBGE sobre a frota de veículos: https://cidades.ibge.gov.br/brasil/pesquisa/22/28120  
-
- https://portal.prf.gov.br/dados-abertos-acidentes 
-
  
 
 **Limitações**
 Disponibilidade de banco de dados consistentes e que abranjam todas as variáveis relacionadas ao trânsito e qualidade desses bancos. 
 
-**Aplicativo**
-Acesse o aplicativo em: [Acidente de Trânsito](https://larissamoreno.shinyapps.io/appp/)
+
 
