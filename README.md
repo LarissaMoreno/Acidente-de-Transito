@@ -1,6 +1,5 @@
 # Acidente de Trânsito
 
-**Aplicativo**
 Acesse o aplicativo em: [Acidente de Trânsito](https://larissamoreno.shinyapps.io/appp/)
 
 ![alt text](https://github.com/LarissaMoreno/Acidente-de-Transito/blob/main/imagem1.png)
