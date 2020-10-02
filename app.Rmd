@@ -1,0 +1,303 @@
+---
+title: "Acidente de Trânsito"
+output: 
+  flexdashboard::flex_dashboard:
+    theme: flatly
+    social: social
+    source_code: embed 
+    orientation: rows
+runtime: shiny
+---
+
+```{r global, include=FALSE}
+# load data in 'global' chunk so it can be shared by all users of the dashboard
+library(flexdashboard)
+library(readr)
+library(readxl)
+library(kableExtra)
+library(ggplot2)
+library(DT)
+library(dplyr)
+library(shiny)
+library(lubridate)
+library(stringr)
+library(leaflet)
+library(stats)
+library(tidyverse)
+library(d3treeR)
+library(treemap)
+library(treemapify)
+dados=readRDS("total.rds")
+mortalidade1 <- read_excel("mortalidade1.xlsx")
+tentativa <- read_excel("tentativa.xlsx")
+
+dados$horas=substring(dados$horario,1,2)
+
+wom <- function(date) { 
+  first <- wday(as.Date(paste(year(date),month(date),1,sep="-")))
+  return((mday(date)+(first-2)) %/% 7+1)
+}
+teste=data.frame(data_inversa=unique(dados$data_inversa))
+
+
+tentativa$Total=as.numeric(tentativa$Total)
+
+
+```
+
+
+Sazonalidade {data-icon="fa-clock"}
+=======================================================================
+
+Column {.sidebar}
+-----------------------------------------------------------------------
+```{r}
+selectInput("uf","uf",choices= list("Norte" = list("AC","AM","AP","TO","PA","RR","RO"),
+              "Nordeste" = list("CE","AL","BA","MA","PA","PE",
+                                "PI","RN","SE"),
+              "Centro-Oeste" = list("GO","MT","MS","DF"),
+              "Sudeste"=list("ES","MG","RJ","SP"),
+              "Sul"=list("PR","SC","RS")),selected = "DF")
+
+selectInput("ano","ano",choices =unique(dados$ano))
+
+selectInput("tipo","tipo de acidente",choices =unique(dados$tipo_acidente))
+
+```
+
+Row {data-height=500}
+-----------------------------------------------------------------------
+
+
+### Número de Acidentes por horas
+
+
+```{r}
+renderPlot({
+  line=dados%>%
+    filter(uf %in% input$uf & ano %in% input$ano & tipo_acidente %in% input$tipo)%>%
+    group_by(horas)%>%summarise(n=n())
+  line$horas<-as.numeric(line$horas)
+  ggplot(line,aes(x=horas,y=n))+geom_line()+
+    scale_x_continuous("horas", labels = as.character(line$horas), breaks = line$horas)+
+    labs(y="Frequência")
+  })    
+
+```
+
+  
+Row {data-height=500}
+-----------------------------------------------------------------------
+
+
+### Número de Acidentes por dia da semana
+
+
+```{r}
+renderPlot({
+  barras=dados%>%
+  filter(uf %in% input$uf & ano %in% input$ano & tipo_acidente %in% input$tipo)%>%
+  group_by(dia_semana)%>%summarise(n=n())
+
+ggplot() + geom_bar(aes(x = dia_semana, y = n),fill="steelblue", 
+                    data = barras, stat = 'identity')+coord_flip()+
+  labs(x="Dia da semana",y="Frequência")
+})
+```
+
+
+Classificação dos Acidentes {data-icon="fa-car"}
+=======================================================================
+
+Column {.sidebar}
+-----------------------------------------------------------------------
+```{r}
+selectInput("ano1","ano",choices =unique(dados$ano))
+
+selectInput("causa","causa do acidente",choices =unique(dados$causa_acidente))
+
+
+
+```
+
+Row {.tabset .tabset-fade}
+-----------------------------------------------------------------------
+
+### Causa do Acidente 
+
+```{r}
+
+renderPlot({
+
+
+  p=dados%>%filter(ano %in% input$ano1 & causa_acidente %in% input$causa)%>%
+  group_by(data_inversa)%>%summarise(counts=sum(ponto))
+
+    
+  missing<- full_join(p,teste,by="data_inversa")
+  missing$counts[is.na(missing$counts)]=0
+  p=missing
+
+  p$cdow=wday(as.Date(p$data_inversa),label=T)
+  p$week  <- wom(as.Date(p$data_inversa))
+  p$day   <- mday(as.Date(p$data_inversa))
+  p$cmonth<- month(as.Date(p$data_inversa),label=T)
+  p$ano=year(as.Date(p$data_inversa))
+  p=p[complete.cases(p), ]
+  p=p[p$ano %in% input$ano1,]
+  
+  ggplot(p, aes(x=cdow,y=-week))+
+  geom_tile(aes(fill=counts,colour="grey50"))+
+  geom_text(aes(label=day),size=3,colour="grey20")+
+  facet_wrap(~cmonth, ncol=4)+
+  scale_fill_gradient(low = "white", high = "firebrick3", na.value="white")+
+  scale_color_manual(guide=F,values="grey50")+
+  scale_x_discrete(labels=c("Sab","Seg","Ter","Quar","Qui","Sex","Dom"))+
+  theme(axis.text.y=element_blank(),axis.ticks.y=element_blank())+
+  theme(panel.grid=element_blank())+
+  labs(x="",y="")+
+  coord_fixed()
+})
+
+```
+
+
+### Treemap
+
+
+
+```{r}
+renderD3tree2({
+  dados1=dados%>%filter(causa_acidente %in% input$causa & ano %in% input$ano1)%>%
+  select(classificacao_acidente,fase_dia, condicao_metereologica) %>%
+  group_by(classificacao_acidente,fase_dia, condicao_metereologica) %>%
+  summarise(area = sum(table(classificacao_acidente)))%>%arrange(condicao_metereologica)
+
+dados1$label <- paste(dados1$area)
+
+q <- treemap(dados1,
+             index=c("fase_dia", "condicao_metereologica","classificacao_acidente"),
+             vSize="area",
+             vColor = "condicao_metereologica",
+             type="index",
+             fontcolor.labels=c("black","black", "black"),    
+             fontface.labels=c(1,1,1),
+             bg.labels=c("white"),
+             align.labels=list(
+               c("center", "center"),
+               c("center", "center"),
+               c("center", "center")
+             ))
+ dev.off()
+  d3tree2( q ,  rootname = "Classificação do acidente" )
+
+})
+
+```
+
+
+### Tabela
+```{r}
+renderUI({
+    table=dados%>%filter(causa_acidente %in% input$causa & ano %in% input$ano1)%>%
+  select(tipo_acidente) %>%
+  group_by(tipo_acidente) %>%
+  summarise(frequencia = n())%>%arrange(desc(frequencia))
+    table$porcentagem=round(table$frequencia/sum(table$frequencia),3)
+    colnames(table)=c("Tipo de Acidente","Frequência","Porcentagem")
+    HTML(
+        kable(table))
+    })
+```
+
+
+Mapa {data-icon="fa-map-marked-alt"}
+=======================================================================
+
+Column {.sidebar}
+-----------------------------------------------------------------------
+```{r}
+selectInput("ano3","ano",choices =c(2018,2019,2020))
+
+
+```
+
+Row
+-----------------------------------------------------------------------
+
+```{r}
+renderLeaflet({
+  datatran2019=dados%>%filter(ano %in% input$ano3)
+  datatran2019%>%leaflet() %>%
+  addTiles() %>%  
+  addCircleMarkers(
+    lng = datatran2019$long, 
+    lat = datatran2019$lat, 
+    radius = log(datatran2019$ponto), 
+    label = datatran2019$datedate, 
+    clusterOptions = markerClusterOptions())%>% 
+  addMiniMap(toggleDisplay = TRUE,position = "bottomleft")%>%
+  addMeasure(position = "bottomleft")
+})
+
+
+
+```
+
+
+Mortalidade {data-icon="fa-ambulance"}
+=======================================================================
+
+Column {.sidebar}
+-----------------------------------------------------------------------
+```{r}
+selectInput("ano4","ano",choices =unique(tentativa$ano))
+selectInput("uf4","uf",choices= list("Norte" = list("Acre","Amazonas","Amapá","Tocantins","Pará","Roraima","Rondônia"),
+              "Nordeste" = list("Ceará","Alagoas","Bahia","Maranhão","Paraíba","Pernambuco",
+                                "Piauí","Rio Grande do Norte","Sergipe"),
+              "Centro-Oeste" = list("Goiás","Mato Grosso","Mato Grosso do Sul","Distrito Federal"),
+              "Sudeste"=list("Espírito Santo","Minas Gerais","Rio de Janeiro","São Paulo"),
+              "Sul"=list("Paraná","Santa Catarina","Rio Grande do Sul")),selected = "Distrito Federal")
+
+```
+
+Row {.tabset .tabset-fade}
+-----------------------------------------------------------------------
+### Piramide Etaria
+
+```{r}
+renderPlot({
+  
+  pyramid<-tentativa%>%
+  filter(uf %in% input$uf4 & ano %in% input$ano4)
+pyramid$Total=as.numeric(pyramid$Total)
+
+pyramid$Total=ifelse(pyramid$sexo=="masculino",-pyramid$Total,pyramid$Total)
+
+
+ggplot(pyramid, aes(x = idade, y = Total, fill = sexo)) + 
+  geom_bar(subset = (pyramid$sexo == "feminino"), stat = "identity") + 
+  geom_bar(subset = (pyramid$sexo == "masculino"), stat = "identity") + 
+  coord_flip() + 
+  scale_fill_brewer(palette = "Set1") + 
+  theme_bw()
+})
+
+
+```
+
+### Indicadores
+
+```{r}
+renderDataTable({
+  
+  x=mortalidade1%>%filter(ano %in% input$ano4)
+  x=x[,-c(2,3,7,8)]
+  datatable(x)
+
+    })
+```
+
+
+Sobre O Aplicativo {data-icon="fa-info-circle"}
+=======================================================================
