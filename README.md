@@ -1,4 +1,8 @@
 # Acidente de Trânsito
+
+[alt text](https://github.com/LarissaMoreno/Acidente-de-Transito/blob/main/imagem1.png)
+
+
 **Introdução** 
 
 Para atingirmos o objetivo de avaliar a qualidade do transito, iremos observar o cenário complementar, por exemplo, ao invés de observarmos pontos positivos sobre o trânsito, iremos observar pontos negativos, como acidentes e mortes. 
