@@ -252,7 +252,7 @@ Mortalidade {data-icon="fa-ambulance"}
 Column {.sidebar}
 -----------------------------------------------------------------------
 ```{r}
-selectInput("ano4","ano",choices =unique(tentativa$ano))
+selectInput("ano4","ano",choices =sort(unique(tentativa$ano)),selected = 2018)
 selectInput("uf4","uf",choices= list("Norte" = list("Acre","Amazonas","Amapá","Tocantins","Pará","Roraima","Rondônia"),
               "Nordeste" = list("Ceará","Alagoas","Bahia","Maranhão","Paraíba","Pernambuco",
                                 "Piauí","Rio Grande do Norte","Sergipe"),
