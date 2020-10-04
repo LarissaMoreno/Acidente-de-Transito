@@ -27,7 +27,7 @@ library(tidyverse)
 library(d3treeR)
 library(treemap)
 library(treemapify)
-dados=readRDS("total.rds")
+dados=readRDS("total1.rds")
 mortalidade1 <- read_excel("mortalidade1.xlsx")
 tentativa <- read_excel("tentativa.xlsx")
 
