@@ -3,8 +3,8 @@ title: "Acidente de Trânsito"
 output: 
   flexdashboard::flex_dashboard:
     theme: flatly
-    social: social
-    source_code: embed 
+    social: menu
+    source_code: https://github.com/LarissaMoreno/Acidente-de-Transito 
     orientation: rows
 runtime: shiny
 ---
@@ -198,6 +198,7 @@ q <- treemap(dados1,
 
 ### Tabela
 <div align="center">
+
 ```{r}
 renderUI({
     table=dados%>%filter(causa_acidente %in% input$causa & ano %in% input$ano1)%>%
@@ -210,6 +211,7 @@ renderUI({
         kable(table))
     })
 ```
+
 </div>
 
 Mapa {data-icon="fa-map-marked-alt"}
