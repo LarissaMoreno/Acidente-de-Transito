@@ -308,3 +308,28 @@ renderDataTable({
 
 Sobre O Aplicativo {data-icon="fa-info-circle"}
 =======================================================================
+Tendo como base o objetivo de avaliar a qualidade do trânsito no Brasil, criamos um aplicativo que permite ao usuário observar diversas questões relacionadas a acidentes de trânsito, uma vez que um trânsito de qualidade envolve diversos fatores como: tempo de permanência no trânsito diária, qualidade da via,  bem como iluminação, sinalização, entre outros fatores que influenciam na quantidade de acidentes, esse shiny tem ênfase nos casos das rodovias federais. 
+
+
+Nesse shiny o usuário consegue obter informações, como: número de acidentes por hora e por dia da semana, com a opção de filtrar por UF, tipo de acidente ou ainda escolher o ano a ser visualizado. Além disso, podemos analisar a frequência das causas dos acidentes ocorridos por data, em uma visualização clara dos dados. Também é possível visualizar uma tabela que relaciona o tipo de acidente com a causa do acidente por ano.
+
+
+O aplicativo shiny conta também com um mapa do Brasil em que pode-se examinar conforme o usuário interage com mapa as respectivas frequências de acidentes naquele local, com o filtro por ano.
+
+
+Como já foi dito anteriormente, a qualidade no trânsito  tem relação com o número de acidentes, e consequentemente a mortalidade, pensando nisso, também há uma aba específica dedicada a esse assunto, onde é possível verificar uma pirâmide etária das mortes no trânsito, por ano e UF e uma tabela de indicadores.
+Sendo esses indicadores:
+
+- **Vítimas Fatais:** representa a proporção de acidentes com vítimas fatais, dentre o total de acidentes de cada ano selecionado por UF da tabela;
+
+- **Vítimas Feridas:** representa a proporção de acidentes com vítimas feridas, dentre o total de acidentes de cada ano selecionado por UF da tabela;
+
+- **Sem Vítimas:** representa a proporção de acidentes sem vítimas, dentre o total de acidentes de cada ano selecionado por UF da tabela;
+
+- **Taxa de Motorização:** representa a relação entre o número de veículos por 100 habitantes de cada ano selecionado por UF da tabela;
+
+- **Taxa de Mortalidade:** representa o número de óbitos nos acidentes ocorridos ao longo do ano selecionado por 100 mil habitantes da UF .
+
+- **Média de Acidentes por dia:** representa a quantidade média de acidentes por dia segundo as UFs da tabela e o ano selecionado.
+
+Isso por cada uma das UFs, segundo o ano escolhido pelo usuário, que pode ser de 2017 a 2019.
