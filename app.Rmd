@@ -78,9 +78,13 @@ renderPlot({
     filter(uf %in% input$uf & ano %in% input$ano & tipo_acidente %in% input$tipo)%>%
     group_by(horas)%>%summarise(n=n())
   line$horas<-as.numeric(line$horas)
-  ggplot(line,aes(x=horas,y=n))+geom_line()+
-    scale_x_continuous("horas", labels = as.character(line$horas), breaks = line$horas)+
-    labs(y="Frequência")
+ggplot(line,aes(x=horas,y=n))+geom_line(size=1.2,color="#1B998B")+
+  scale_x_continuous("horas", labels = as.character(paste(line$horas,"h",sep="")), 
+                     breaks = line$horas)+
+  labs(y="Frequência")+
+  theme_classic()+
+  xlab("Horário")
+
   })    
 
 ```
