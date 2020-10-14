@@ -5,11 +5,11 @@ output:
     theme: flatly
     social: menu
     source_code: https://github.com/LarissaMoreno/Acidente-de-Transito 
-    orientation: rows
+    orientation: columns
 runtime: shiny
 ---
 
-```{r global, include=FALSE}
+```{r setup, include=FALSE}
 # load data in 'global' chunk so it can be shared by all users of the dashboard
 library(flexdashboard)
 library(readr)
@@ -27,6 +27,11 @@ library(tidyverse)
 library(d3treeR)
 library(treemap)
 library(treemapify)
+library(geojsonio)
+library(stats)
+library(directlabels)
+
+states <- geojson_read("https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/brazil-states.geojson",  what = "sp")
 dados=readRDS("total1.rds")
 mortalidade1 <- read_excel("mortalidade1.xlsx")
 tentativa <- read_excel("tentativa.xlsx")
@@ -46,36 +51,180 @@ tentativa$Total=as.numeric(tentativa$Total)
 ```
 
 
-Sazonalidade {data-icon="fa-clock"}
-=======================================================================
+Home Page {data-icon="fa-info-circle"}
+=============================================================================
 
-Column {.sidebar}
+Inputs {.sidebar}
 -----------------------------------------------------------------------
 ```{r}
+selectInput("ano4","Ano",choices =sort(unique(tentativa$ano)),selected = 2018)
+selectInput("uf4","Uf",choices= list("Norte" = list("Acre","Amazonas","Amapá","Tocantins","Pará","Roraima","Rondônia"),
+              "Nordeste" = list("Ceará","Alagoas","Bahia","Maranhão","Paraíba","Pernambuco",
+                                "Piauí","Rio Grande do Norte","Sergipe"),
+              "Centro-Oeste" = list("Goiás","Mato Grosso","Mato Grosso do Sul","Distrito Federal"),
+              "Sudeste"=list("Espírito Santo","Minas Gerais","Rio de Janeiro","São Paulo"),
+              "Sul"=list("Paraná","Santa Catarina","Rio Grande do Sul")),selected = "Distrito Federal")
+
+```
+
+
+Column {data-height=2000 .tabset}
+-----------------------------------------------------------------------
+### Introdução
+
+Tendo como base o objetivo de avaliar a qualidade do trânsito no Brasil, criamos um aplicativo que permite ao usuário observar diversas questões relacionadas a acidentes de trânsito, uma vez que um trânsito de qualidade envolve diversos fatores como: tempo de permanência no trânsito diária, qualidade da via,  bem como iluminação, sinalização, entre outros fatores que influenciam na quantidade de acidentes, esse shiny tem ênfase nos casos das rodovias federais. 
+
+
+Nesse shiny o usuário consegue obter informações, como: número de acidentes por hora e por dia da semana, com a opção de filtrar por UF, tipo de acidente ou ainda escolher o ano a ser visualizado. Além disso, podemos analisar a frequência das causas dos acidentes ocorridos por data, em uma visualização clara dos dados. Também é possível visualizar uma tabela que relaciona o tipo de acidente com a causa do acidente por ano.
+
+
+O aplicativo shiny conta também com um mapa do Brasil em que pode-se examinar conforme o usuário interage com mapa as respectivas frequências de acidentes naquele local, com o filtro por ano.
+
+
+Como já foi dito anteriormente, a qualidade no trânsito  tem relação com o número de acidentes, e consequentemente a mortalidade, pensando nisso, também há uma aba específica dedicada a esse assunto, onde é possível verificar uma pirâmide etária das mortes no trânsito, por ano e UF e uma tabela de indicadores.
+Sendo esses indicadores:
+
+- **Vítimas Fatais:** representa a proporção de acidentes com vítimas fatais, dentre o total de acidentes de cada ano selecionado por UF da tabela;
+
+- **Vítimas Feridas:** representa a proporção de acidentes com vítimas feridas, dentre o total de acidentes de cada ano selecionado por UF da tabela;
+
+- **Sem Vítimas:** representa a proporção de acidentes sem vítimas, dentre o total de acidentes de cada ano selecionado por UF da tabela;
+
+- **Taxa de Motorização:** representa a relação entre o número de veículos por 100 habitantes de cada ano selecionado por UF da tabela;
+
+- **Taxa de Mortalidade:** representa o número de óbitos nos acidentes ocorridos ao longo do ano selecionado por 100 mil habitantes da UF .
+
+- **Média de Acidentes por dia:** representa a quantidade média de acidentes por dia segundo as UFs da tabela e o ano selecionado.
+
+Isso por cada uma das UFs, segundo o ano escolhido pelo usuário, que pode ser de 2017 a 2019.
+
+```{r}
+HTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/UttRHB2cT4o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
+
+```
+
+
+### Mortalidade {data-height=2000}
+<style>
+.ScrollStyle
+{
+  max-height: 90000px;
+  overflow-y: scroll;
+  overflow-x:hidden; 
+  height:500px;
+}
+</style>
+<div class="ScrollStyle">
+```{r}
+
+renderPlot({
+  pyramid<-tentativa%>%
+  filter(uf %in% input$uf4 & ano %in% input$ano4)
+pyramid$Total=as.numeric(pyramid$Total)
+
+pyramid$Total=ifelse(pyramid$sexo=="masculino",-pyramid$Total,pyramid$Total)
+
+
+ggplot(pyramid, aes(x = idade, y = Total, fill = sexo)) + 
+  geom_bar(subset = (pyramid$sexo == "feminino"), stat = "identity") + 
+  geom_bar(subset = (pyramid$sexo == "masculino"), stat = "identity") + 
+  coord_flip() + 
+  scale_fill_brewer(palette = "Set1") + 
+  theme_bw()
+
+})
+
+```
+
+Taxa de Mortalidade
+```{r}
+
+renderPlot({
+  y=mortalidade1%>%filter(uf %in% input$uf4)
+ggplot(y,aes(x=ano,y=taxa))+geom_line(size=1.2,color="#1B998B")+
+  scale_x_continuous("Ano", 
+                     breaks = c(2018,2019))+
+  labs(y="Taxa de Mortalidade")+
+  geom_dl(aes(label = round(taxa,3)), method = list(dl.trans(x = x + .1), "last.points"))+
+  geom_dl(aes(label = round(taxa,3)), method = list(dl.trans(x = x - .1), "first.points"))
+
+})
+```
+
+</div>
+
+Mapa {data-icon="fa-map-marked-alt"}
+=======================================================================
+
+Inputs {.sidebar}
+-----------------------------------------------------------------------
+```{r}
+selectInput("ano3","ano",choices =c(2018,2019))
+
+selectInput("tipo","tipo de acidente",choices =unique(dados$tipo_acidente))
 selectInput("uf","uf",choices= list("Norte" = list("AC","AM","AP","TO","PA","RR","RO"),
               "Nordeste" = list("CE","AL","BA","MA","PA","PE",
                                 "PI","RN","SE"),
               "Centro-Oeste" = list("GO","MT","MS","DF"),
               "Sudeste"=list("ES","MG","RJ","SP"),
               "Sul"=list("PR","SC","RS")),selected = "DF")
+```
 
-selectInput("ano","ano",choices =unique(dados$ano))
+Column {data-width=600}
+-----------------------------------------------------------------------
 
-selectInput("tipo","tipo de acidente",choices =unique(dados$tipo_acidente))
+```{r}
+renderLeaflet({
+  datatran2019=dados%>%filter(ano %in% input$ano3)
+states2<-merge(x=states,y=as.data.frame(table(datatran2019$uf)),by.x='sigla',by.y='Var1')
+bins <- c(0, 50, 200, 500, 1000, 2000, 5000, Inf)
+pal <- colorBin("PuBu", domain =states2$Freq, bins = bins)
+labels <- sprintf(
+  "<strong>%s</strong><br/>%s Acidentes </sup>",
+  states$name, states2$Freq
+) %>% lapply(htmltools::HTML)
+
+leaflet(states) %>%
+  setView(-47, -15.8, 3) %>%
+  addProviderTiles("Stamen.Watercolor", options = providerTileOptions(
+    id = "mapbox.light",
+    accessToken = Sys.getenv('MAPBOX_ACCESS_TOKEN'))) %>%
+  addPolygons(
+    fillColor = ~pal(states2$Freq),
+    weight = 2,
+    opacity = 1,
+    color = "white",
+    dashArray = "3",
+    fillOpacity = 0.7,
+    highlight = highlightOptions(
+      weight = 5,
+      color = "#666",
+      dashArray = "",
+      fillOpacity = 0.7,
+      bringToFront = TRUE),
+    label = labels,
+    labelOptions = labelOptions(
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "15px",
+      direction = "auto")) %>%
+  addLegend(pal = pal, values = ~regiao_id, opacity = 0.7, title = NULL,
+            position = "bottomleft")%>%
+  addMeasure(position = "bottomleft")
+})
+
+
 
 ```
 
-Row {data-height=500}
------------------------------------------------------------------------
+Column {data-width=500}
+-------------------------------------
 
-
-### Número de Acidentes por horas
-
+### Sazonalidade Horário
 
 ```{r}
 renderPlot({
   line=dados%>%
-    filter(uf %in% input$uf & ano %in% input$ano & tipo_acidente %in% input$tipo)%>%
+    filter(uf %in% input$uf & ano %in% input$ano3 & tipo_acidente %in% input$tipo)%>%
     group_by(horas)%>%summarise(n=n())
   line$horas<-as.numeric(line$horas)
 ggplot(line,aes(x=horas,y=n))+geom_line(size=1.2,color="#1B998B")+
@@ -85,35 +234,38 @@ ggplot(line,aes(x=horas,y=n))+geom_line(size=1.2,color="#1B998B")+
   theme_classic()+
   xlab("Horário")
 
-  })    
-
+  })  
 ```
 
-  
-Row {data-height=500}
------------------------------------------------------------------------
-
-
-### Número de Acidentes por dia da semana
-
+### Sazonalidade Dia das Semana
 
 ```{r}
 renderPlot({
   barras=dados%>%
-  filter(uf %in% input$uf & ano %in% input$ano & tipo_acidente %in% input$tipo)%>%
-  group_by(dia_semana)%>%summarise(n=n())
+  filter(uf %in% input$uf & ano %in% input$ano3 & tipo_acidente %in% input$tipo)%>%
+  group_by(dia_semana)%>%summarise(n=n())%>%mutate(proporcao = (n/sum(n))*100)
 
-ggplot() + geom_bar(aes(x = dia_semana, y = n),fill="steelblue", 
-                    data = barras, stat = 'identity')+coord_flip()+
-  labs(x="Dia da semana",y="Frequência")
+names(barras)<-c("dia","Acidentes","proporcao")
+barras$dia=gsub("-feira","",barras$dia)
+barras$dia<-  factor(barras$dia,
+                levels=c("domingo","segunda","terça","quarta",
+                         "quinta","sexta","sábado"))
+
+barras=barras[order(barras$dia), ]
+
+ggplot() + geom_bar(aes(x = dia, y = Acidentes),fill="#1B998B", 
+                    data = barras, stat = 'identity')+
+  labs(x="Dia da semana",y="Frequência")+
+  geom_text(data=barras,aes(x = dia, y = Acidentes,label=paste0(round(proporcao,3),"%")),
+            vjust=-0.25,check_overlap = T,position = position_dodge(width = 0.9))+
+  theme(axis.text.x = element_text(angle = 30))
+
 })
 ```
 
-
 Classificação dos Acidentes {data-icon="fa-car"}
-=======================================================================
-
-Column {.sidebar}
+====================================================================
+Inputs {.sidebar}
 -----------------------------------------------------------------------
 ```{r}
 selectInput("ano1","ano",choices =unique(dados$ano))
@@ -124,9 +276,8 @@ selectInput("causa","causa do acidente",choices =unique(dados$causa_acidente))
 
 ```
 
-Row {.tabset .tabset-fade}
+Column {data-width=700}
 -----------------------------------------------------------------------
-
 ### Causa do Acidente 
 
 ```{r}
@@ -165,11 +316,44 @@ renderPlot({
 
 ```
 
+Column {data-width=400}
+-----------------------------------------------------------------------
 
-### Treemap
+### Tipo
+
+<div align="center">
+
+```{r}
+renderUI({
+    table=dados%>%filter(causa_acidente %in% input$causa & ano %in% input$ano1)%>%
+  select(tipo_acidente) %>%
+  group_by(tipo_acidente) %>%
+  summarise(frequencia = n())%>%arrange(desc(frequencia))
+    table$porcentagem=round(table$frequencia/sum(table$frequencia),3)
+    colnames(table)=c("Tipo de Acidente","Frequência","Porcentagem")
+    HTML(
+        kable(table))
+    })
+```
+
+</div>
+
+Condição Meteoroliga {data-icon="fa-umbrella"}
+===================================================================================
+Inputs {.sidebar}
+-----------------------------------------------------------------------
+```{r}
+selectInput("ano1","ano",choices =unique(dados$ano))
+
+selectInput("causa","causa do acidente",choices =unique(dados$causa_acidente))
 
 
 
+```
+
+
+Column 
+-----------------------------------------------------------------------
 ```{r}
 renderD3tree2({
   dados1=dados%>%filter(causa_acidente %in% input$causa & ano %in% input$ano1)%>%
@@ -200,136 +384,3 @@ q <- treemap(dados1,
 ```
 
 
-### Tabela
-<div align="center">
-
-```{r}
-renderUI({
-    table=dados%>%filter(causa_acidente %in% input$causa & ano %in% input$ano1)%>%
-  select(tipo_acidente) %>%
-  group_by(tipo_acidente) %>%
-  summarise(frequencia = n())%>%arrange(desc(frequencia))
-    table$porcentagem=round(table$frequencia/sum(table$frequencia),3)
-    colnames(table)=c("Tipo de Acidente","Frequência","Porcentagem")
-    HTML(
-        kable(table))
-    })
-```
-
-</div>
-
-Mapa {data-icon="fa-map-marked-alt"}
-=======================================================================
-
-Column {.sidebar}
------------------------------------------------------------------------
-```{r}
-selectInput("ano3","ano",choices =c(2018,2019,2020))
-
-
-```
-
-Row
------------------------------------------------------------------------
-
-```{r}
-renderLeaflet({
-  datatran2019=dados%>%filter(ano %in% input$ano3)
-  datatran2019%>%leaflet() %>%
-  addTiles() %>%  
-  addCircleMarkers(
-    lng = datatran2019$long, 
-    lat = datatran2019$lat, 
-    radius = log(datatran2019$ponto), 
-    label = datatran2019$datedate, 
-    clusterOptions = markerClusterOptions())%>% 
-  addMiniMap(toggleDisplay = TRUE,position = "bottomleft")%>%
-  addMeasure(position = "bottomleft")
-})
-
-
-
-```
-
-
-Mortalidade {data-icon="fa-ambulance"}
-=======================================================================
-
-Column {.sidebar}
------------------------------------------------------------------------
-```{r}
-selectInput("ano4","ano",choices =sort(unique(tentativa$ano)),selected = 2018)
-selectInput("uf4","uf",choices= list("Norte" = list("Acre","Amazonas","Amapá","Tocantins","Pará","Roraima","Rondônia"),
-              "Nordeste" = list("Ceará","Alagoas","Bahia","Maranhão","Paraíba","Pernambuco",
-                                "Piauí","Rio Grande do Norte","Sergipe"),
-              "Centro-Oeste" = list("Goiás","Mato Grosso","Mato Grosso do Sul","Distrito Federal"),
-              "Sudeste"=list("Espírito Santo","Minas Gerais","Rio de Janeiro","São Paulo"),
-              "Sul"=list("Paraná","Santa Catarina","Rio Grande do Sul")),selected = "Distrito Federal")
-
-```
-
-Row {.tabset .tabset-fade}
------------------------------------------------------------------------
-### Piramide Etaria
-
-```{r}
-renderPlot({
-  
-  pyramid<-tentativa%>%
-  filter(uf %in% input$uf4 & ano %in% input$ano4)
-pyramid$Total=as.numeric(pyramid$Total)
-
-pyramid$Total=ifelse(pyramid$sexo=="masculino",-pyramid$Total,pyramid$Total)
-
-
-ggplot(pyramid, aes(x = idade, y = Total, fill = sexo)) + 
-  geom_bar(subset = (pyramid$sexo == "feminino"), stat = "identity") + 
-  geom_bar(subset = (pyramid$sexo == "masculino"), stat = "identity") + 
-  coord_flip() + 
-  scale_fill_brewer(palette = "Set1") + 
-  theme_bw()
-})
-
-
-```
-
-### Indicadores
-
-```{r}
-renderDataTable({
-  
-  x=mortalidade1%>%filter(ano %in% input$ano4)
-  x=x[,-c(2,3,7,8)]
-  datatable(x)
-
-    })
-```
-
-
-Sobre O Aplicativo {data-icon="fa-info-circle"}
-=======================================================================
-Tendo como base o objetivo de avaliar a qualidade do trânsito no Brasil, criamos um aplicativo que permite ao usuário observar diversas questões relacionadas a acidentes de trânsito, uma vez que um trânsito de qualidade envolve diversos fatores como: tempo de permanência no trânsito diária, qualidade da via,  bem como iluminação, sinalização, entre outros fatores que influenciam na quantidade de acidentes, esse shiny tem ênfase nos casos das rodovias federais. 
-
-
-Nesse shiny o usuário consegue obter informações, como: número de acidentes por hora e por dia da semana, com a opção de filtrar por UF, tipo de acidente ou ainda escolher o ano a ser visualizado. Além disso, podemos analisar a frequência das causas dos acidentes ocorridos por data, em uma visualização clara dos dados. Também é possível visualizar uma tabela que relaciona o tipo de acidente com a causa do acidente por ano.
-
-
-O aplicativo shiny conta também com um mapa do Brasil em que pode-se examinar conforme o usuário interage com mapa as respectivas frequências de acidentes naquele local, com o filtro por ano.
-
-
-Como já foi dito anteriormente, a qualidade no trânsito  tem relação com o número de acidentes, e consequentemente a mortalidade, pensando nisso, também há uma aba específica dedicada a esse assunto, onde é possível verificar uma pirâmide etária das mortes no trânsito, por ano e UF e uma tabela de indicadores.
-Sendo esses indicadores:
-
-- **Vítimas Fatais:** representa a proporção de acidentes com vítimas fatais, dentre o total de acidentes de cada ano selecionado por UF da tabela;
-
-- **Vítimas Feridas:** representa a proporção de acidentes com vítimas feridas, dentre o total de acidentes de cada ano selecionado por UF da tabela;
-
-- **Sem Vítimas:** representa a proporção de acidentes sem vítimas, dentre o total de acidentes de cada ano selecionado por UF da tabela;
-
-- **Taxa de Motorização:** representa a relação entre o número de veículos por 100 habitantes de cada ano selecionado por UF da tabela;
-
-- **Taxa de Mortalidade:** representa o número de óbitos nos acidentes ocorridos ao longo do ano selecionado por 100 mil habitantes da UF .
-
-- **Média de Acidentes por dia:** representa a quantidade média de acidentes por dia segundo as UFs da tabela e o ano selecionado.
-
-Isso por cada uma das UFs, segundo o ano escolhido pelo usuário, que pode ser de 2017 a 2019.
