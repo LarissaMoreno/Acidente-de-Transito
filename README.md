@@ -28,8 +28,6 @@ Qualidade no trânsito envolve diversos fatores, nesse projeto iremos dar ênfas
 
  Dados sobre os acidentes de trânsito da Polícia Federal:  https://portal.prf.gov.br/dados-abertos-acidentes 
 
- IBGE sobre a frota de veículos: https://cidades.ibge.gov.br/brasil/pesquisa/22/28120  
- 
 
 ## Limitações
 Disponibilidade de banco de dados consistentes e que abranjam todas as variáveis relacionadas ao trânsito e qualidade desses bancos. 
