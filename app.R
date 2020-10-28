@@ -18,7 +18,7 @@ library(geojsonio)
 library(stats)
 library(directlabels)
 library(shinyWidgets)
-library(shinythemes)
+library(shinydashboard)
 states <- geojson_read("https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/brazil-states.geojson",  what = "sp")
 dados=readRDS("total1.rds")
 mortalidade1 <- read_excel("mortalidade1.xlsx")
@@ -31,14 +31,18 @@ wom <- function(date) {
   return((mday(date)+(first-2)) %/% 7+1)
 }
 teste=data.frame(data_inversa=unique(dados$data_inversa))
-
-
 tentativa$Total=as.numeric(tentativa$Total)
 
+
+
 ui = tagList(
-  navbarPage(
-    theme = shinytheme("united"),
-    tabPanel("Navbar 2","Acidente de Transito")    ,
+  navbarPage(   tags$style(HTML("
+.navbar { background-color: #1B998B;}
+.navbar-default .navbar-nav > li > a {color:black;}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:focus,
+ .navbar-default .navbar-nav > li > a:hover {color: black;background-color:#BAF3EC;text-decoration:underline;}
+ ")),
     tabPanel("Home Page",
              inputPanel(
                selectInput("ano4","Ano",choices =sort(unique(tentativa$ano)),selected = 2018),
@@ -50,10 +54,48 @@ ui = tagList(
                                                     "Sul"=list("Paraná","Santa Catarina","Rio Grande do Sul")),selected = "Distrito Federal",
                            multiple = T, options = list(`actions-box` = TRUE))
              ),
-             tabsetPanel(tabPanel("Home",mainPanel(
-               HTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/UttRHB2cT4o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'))),
-               tabPanel("Mortalidade",mainPanel(splitLayout( cellWidths = c("70%", "70%"),plotOutput("plot1"), plotOutput("plot2")) ))
-             )),
+##############################################tabset1             
+             tabsetPanel(tabPanel("Home",sidebarPanel(h3("Acidente de Trânsito"),
+                                                      h6("No Brasil, nos últimos anos, em decorrência da estabilidade econômica e ao aumento da população,
+                                                         o volume de carros tem aumentado significativamente. Como existe poucos estudos a respeito dos acidentes
+                                                         de trânsito, esse aplicativo visa contribuir para o desenvolvimento dessa área de estudo em relação as rodovias
+                                                         federais do Brasil."),
+                                                      p(
+                                                        h6("Os acidentes de trânsito se configuram como grave problema de saúde pública no País pois, aumenta a quantidade de
+                                                           atendimentos em hospitais e uma boa quantidade de recursos da área médica devem ser direcionados a esses atendimentos.
+                                                           Essas emergências têm, porém, um aspecto particular: a maioria delas é evitável"))),
+                                  mainPanel(column(6,HTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/UttRHB2cT4o" frameborder="0" allow="accelerometer; 
+                                                          autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'))
+                                  ),
+                                  mainPanel(column(6,imageOutput("image")),
+                                            sidebarPanel(h5("Um estudo realizado pelo “perguntar para o professor” mostrou que 57% dos acidentes são causados 
+                                                            por falha humana, 3% devido as condições da via e 2% por causa de problemas nos veículos. "),
+                                                         h5("A “falha humana”, portanto, é a principal fator dos acidentes nas estradas e ruas brasileiras, e ela é causada principalmente pela 
+                                                            imprudência dos motoristas, infração das leis de trânsito e falta de atenção do condutor.")))
+                                                         ),
+####################################################tabset2
+                         tabPanel("Mortalidade",box(h3("Mortalidade"),
+                                                    h5("o	De acordo com a OMS 1,25 milhão de pessoas morrem, no mundo,
+                                                       por ano em acidentes de trânsito, e dessa total metade das vítimas são pedestres, ciclistas e motociclistas."),
+                                                    h5("A cada dia, ocorre 14 mortes no trânsito no Brasil"),
+                                                    h5("A cada dia, o Brasil registra 190 acidentes nas rodovias federais."),
+                                                    h5("São 82 acidentes com vítimas a cada 100 km de rodovia federal no Brasil "),
+                                                    h5("Colisão é o tipo mais comum de acidentes com vítimas no Brasil"),
+                                                    h5("Sudeste e Sul concentram os maiores índices de acidentes com vítimas"),
+                                                    h5("As rodovias do Nordeste são as que mais matam no Brasil "),
+                                                    h5("Nordeste, Norte e Centro-Oeste registram acidentes mais graves")
+                                                    ),
+                                  box( h3("Mortalidade"),h5("Minas Gerais é campeã em número de mortes e de acidentes nas rodovias federais "),
+                                       h5("Minas Gerais também está à frente do ranking de custos com acidente"),
+                                       h5("DF registra quatro vezes mais acidentes do que a média nacional  "),
+                                       h5("Maranhão, Amazonas, Alagoas, Tocantins, e Bahia registram os acidentes mais graves "),
+                                       h5("As rodovias do Paraná concentram mais mortes de ciclistas "),
+                                       h5("A maior parte das mortes por atropelamento também ocorre no Paraná "),
+                                       h5("Nordeste é a região com maior número de mortes de motociclistas "),
+                                       h5("Goiás concentra 40% dos acidentes com motos nas rodovias federais do Centro-Oeste")),
+                                  mainPanel(splitLayout( cellWidths = c("70%", "70%"),plotOutput("plot1"), plotOutput("plot2")) ))
+                                  )),
+###########################################2 Painel
     tabPanel("Mapa",
              inputPanel(selectInput("ano3","ano",choices =c(2018,2019)),
                         
@@ -66,19 +108,25 @@ ui = tagList(
                                                             "Sul"=list("PR","SC","RS")),selected = "DF")),
              
              mainPanel(splitLayout(cellWidths = c("70%","80%"),plotOutput("plot4"),leafletOutput("plot3")), column(8,plotOutput("plot5")))),
+############################################3 Painel
     tabPanel("Classificação dos Acidentes",
              inputPanel(
                selectInput("ano1","ano",choices =unique(dados$ano)),
                selectInput("causa","causa do acidente",choices =unique(dados$causa_acidente))),
              mainPanel(splitLayout(cellWidths = c("100%","50%"),plotOutput("plot6"), uiOutput("plot7")) )
     ),
+############################################4 Painel
     tabPanel("Condição Meteoroliga",
              inputPanel(selectInput("ano1","ano",choices =unique(dados$ano)),
                         selectInput("causa","causa do acidente",choices =unique(dados$causa_acidente))
              ))
+             )
   )
-)
 server=function(input,output){
+  output$image=renderImage({
+    list(src="elementos.png",contentType="elementos/png",width = 700,
+         height = 400)
+  },deleteFile = F)
   output$plot1=renderPlot({
     pyramid<-tentativa%>%
       filter(uf %in% input$uf4 & ano %in% input$ano4)
@@ -218,7 +266,6 @@ server=function(input,output){
     HTML(
       kable(table))
   })
-}  
+}
 
-
-shinyApp(ui,server)
+shinyApp(ui, server)
