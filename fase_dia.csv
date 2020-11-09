@@ -1,0 +1,281 @@
+"condicao_metereologica","fase_dia","ano","feridos","n"
+"Céu Claro","Amanhecer",2018,"ileso",1597
+"Chuva","Amanhecer",2018,"ileso",395
+"Garoa/Chuvisco","Amanhecer",2018,"ileso",162
+"Granizo","Amanhecer",2018,"ileso",1
+"Ignorado","Amanhecer",2018,"ileso",135
+"Nevoeiro/Neblina","Amanhecer",2018,"ileso",203
+"Nublado","Amanhecer",2018,"ileso",693
+"Sol","Amanhecer",2018,"ileso",72
+"Vento","Amanhecer",2018,"ileso",7
+"Céu Claro","Anoitecer",2018,"ileso",2300
+"Chuva","Anoitecer",2018,"ileso",614
+"Garoa/Chuvisco","Anoitecer",2018,"ileso",188
+"Granizo","Anoitecer",2018,"ileso",2
+"Ignorado","Anoitecer",2018,"ileso",106
+"Nevoeiro/Neblina","Anoitecer",2018,"ileso",2
+"Nublado","Anoitecer",2018,"ileso",885
+"Sol","Anoitecer",2018,"ileso",28
+"Vento","Anoitecer",2018,"ileso",10
+"Céu Claro","Plena Noite",2018,"ileso",13325
+"Chuva","Plena Noite",2018,"ileso",2885
+"Garoa/Chuvisco","Plena Noite",2018,"ileso",958
+"Ignorado","Plena Noite",2018,"ileso",536
+"Nevoeiro/Neblina","Plena Noite",2018,"ileso",268
+"Nublado","Plena Noite",2018,"ileso",5166
+"Sol","Plena Noite",2018,"ileso",14
+"Vento","Plena Noite",2018,"ileso",74
+"Céu Claro","Pleno dia",2018,"ileso",23474
+"Chuva","Pleno dia",2018,"ileso",5520
+"Garoa/Chuvisco","Pleno dia",2018,"ileso",1182
+"Ignorado","Pleno dia",2018,"ileso",195
+"Nevoeiro/Neblina","Pleno dia",2018,"ileso",162
+"Nublado","Pleno dia",2018,"ileso",6532
+"Sol","Pleno dia",2018,"ileso",6165
+"Vento","Pleno dia",2018,"ileso",20
+"Céu Claro","Amanhecer",2019,"ileso",1666
+"Chuva","Amanhecer",2019,"ileso",249
+"Garoa/Chuvisco","Amanhecer",2019,"ileso",132
+"Granizo","Amanhecer",2019,"ileso",1
+"Ignorado","Amanhecer",2019,"ileso",53
+"Nevoeiro/Neblina","Amanhecer",2019,"ileso",114
+"Nublado","Amanhecer",2019,"ileso",581
+"Sol","Amanhecer",2019,"ileso",61
+"Vento","Amanhecer",2019,"ileso",3
+"Céu Claro","Anoitecer",2019,"ileso",2439
+"Chuva","Anoitecer",2019,"ileso",506
+"Garoa/Chuvisco","Anoitecer",2019,"ileso",167
+"Granizo","Anoitecer",2019,"ileso",0
+"Ignorado","Anoitecer",2019,"ileso",64
+"Nevoeiro/Neblina","Anoitecer",2019,"ileso",6
+"Nublado","Anoitecer",2019,"ileso",775
+"Sol","Anoitecer",2019,"ileso",39
+"Vento","Anoitecer",2019,"ileso",11
+"Céu Claro","Plena Noite",2019,"ileso",13559
+"Chuva","Plena Noite",2019,"ileso",2459
+"Garoa/Chuvisco","Plena Noite",2019,"ileso",958
+"Ignorado","Plena Noite",2019,"ileso",445
+"Neve","Plena Noite",2019,"ileso",0
+"Nevoeiro/Neblina","Plena Noite",2019,"ileso",327
+"Nublado","Plena Noite",2019,"ileso",4671
+"Sol","Plena Noite",2019,"ileso",4
+"Vento","Plena Noite",2019,"ileso",83
+"Céu Claro","Pleno dia",2019,"ileso",22849
+"Chuva","Pleno dia",2019,"ileso",3993
+"Garoa/Chuvisco","Pleno dia",2019,"ileso",1075
+"Granizo","Pleno dia",2019,"ileso",1
+"Ignorado","Pleno dia",2019,"ileso",122
+"Nevoeiro/Neblina","Pleno dia",2019,"ileso",155
+"Nublado","Pleno dia",2019,"ileso",5383
+"Sol","Pleno dia",2019,"ileso",5671
+"Vento","Pleno dia",2019,"ileso",12
+"Céu Claro","Amanhecer",2018,"mortos",226
+"Chuva","Amanhecer",2018,"mortos",41
+"Garoa/Chuvisco","Amanhecer",2018,"mortos",11
+"Granizo","Amanhecer",2018,"mortos",0
+"Ignorado","Amanhecer",2018,"mortos",13
+"Nevoeiro/Neblina","Amanhecer",2018,"mortos",35
+"Nublado","Amanhecer",2018,"mortos",71
+"Sol","Amanhecer",2018,"mortos",12
+"Vento","Amanhecer",2018,"mortos",2
+"Céu Claro","Anoitecer",2018,"mortos",146
+"Chuva","Anoitecer",2018,"mortos",34
+"Garoa/Chuvisco","Anoitecer",2018,"mortos",10
+"Granizo","Anoitecer",2018,"mortos",0
+"Ignorado","Anoitecer",2018,"mortos",11
+"Nevoeiro/Neblina","Anoitecer",2018,"mortos",0
+"Nublado","Anoitecer",2018,"mortos",56
+"Sol","Anoitecer",2018,"mortos",8
+"Vento","Anoitecer",2018,"mortos",0
+"Céu Claro","Plena Noite",2018,"mortos",1565
+"Chuva","Plena Noite",2018,"mortos",206
+"Garoa/Chuvisco","Plena Noite",2018,"mortos",97
+"Ignorado","Plena Noite",2018,"mortos",87
+"Nevoeiro/Neblina","Plena Noite",2018,"mortos",54
+"Nublado","Plena Noite",2018,"mortos",513
+"Sol","Plena Noite",2018,"mortos",0
+"Vento","Plena Noite",2018,"mortos",12
+"Céu Claro","Pleno dia",2018,"mortos",1179
+"Chuva","Pleno dia",2018,"mortos",258
+"Garoa/Chuvisco","Pleno dia",2018,"mortos",42
+"Ignorado","Pleno dia",2018,"mortos",9
+"Nevoeiro/Neblina","Pleno dia",2018,"mortos",10
+"Nublado","Pleno dia",2018,"mortos",290
+"Sol","Pleno dia",2018,"mortos",270
+"Vento","Pleno dia",2018,"mortos",3
+"Céu Claro","Amanhecer",2019,"mortos",235
+"Chuva","Amanhecer",2019,"mortos",41
+"Garoa/Chuvisco","Amanhecer",2019,"mortos",10
+"Granizo","Amanhecer",2019,"mortos",0
+"Ignorado","Amanhecer",2019,"mortos",15
+"Nevoeiro/Neblina","Amanhecer",2019,"mortos",28
+"Nublado","Amanhecer",2019,"mortos",75
+"Sol","Amanhecer",2019,"mortos",10
+"Vento","Amanhecer",2019,"mortos",1
+"Céu Claro","Anoitecer",2019,"mortos",166
+"Chuva","Anoitecer",2019,"mortos",34
+"Garoa/Chuvisco","Anoitecer",2019,"mortos",3
+"Granizo","Anoitecer",2019,"mortos",0
+"Ignorado","Anoitecer",2019,"mortos",5
+"Nevoeiro/Neblina","Anoitecer",2019,"mortos",1
+"Nublado","Anoitecer",2019,"mortos",39
+"Sol","Anoitecer",2019,"mortos",4
+"Vento","Anoitecer",2019,"mortos",0
+"Céu Claro","Plena Noite",2019,"mortos",1664
+"Chuva","Plena Noite",2019,"mortos",222
+"Garoa/Chuvisco","Plena Noite",2019,"mortos",96
+"Ignorado","Plena Noite",2019,"mortos",95
+"Neve","Plena Noite",2019,"mortos",0
+"Nevoeiro/Neblina","Plena Noite",2019,"mortos",36
+"Nublado","Plena Noite",2019,"mortos",513
+"Sol","Plena Noite",2019,"mortos",0
+"Vento","Plena Noite",2019,"mortos",9
+"Céu Claro","Pleno dia",2019,"mortos",1192
+"Chuva","Pleno dia",2019,"mortos",257
+"Garoa/Chuvisco","Pleno dia",2019,"mortos",62
+"Granizo","Pleno dia",2019,"mortos",0
+"Ignorado","Pleno dia",2019,"mortos",15
+"Nevoeiro/Neblina","Pleno dia",2019,"mortos",10
+"Nublado","Pleno dia",2019,"mortos",234
+"Sol","Pleno dia",2019,"mortos",260
+"Vento","Pleno dia",2019,"mortos",1
+"Céu Claro","Amanhecer",2018,"feridos_leves",1475
+"Chuva","Amanhecer",2018,"feridos_leves",314
+"Garoa/Chuvisco","Amanhecer",2018,"feridos_leves",139
+"Granizo","Amanhecer",2018,"feridos_leves",0
+"Ignorado","Amanhecer",2018,"feridos_leves",82
+"Nevoeiro/Neblina","Amanhecer",2018,"feridos_leves",156
+"Nublado","Amanhecer",2018,"feridos_leves",594
+"Sol","Amanhecer",2018,"feridos_leves",71
+"Vento","Amanhecer",2018,"feridos_leves",6
+"Céu Claro","Anoitecer",2018,"feridos_leves",1934
+"Chuva","Anoitecer",2018,"feridos_leves",467
+"Garoa/Chuvisco","Anoitecer",2018,"feridos_leves",120
+"Granizo","Anoitecer",2018,"feridos_leves",0
+"Ignorado","Anoitecer",2018,"feridos_leves",79
+"Nevoeiro/Neblina","Anoitecer",2018,"feridos_leves",15
+"Nublado","Anoitecer",2018,"feridos_leves",678
+"Sol","Anoitecer",2018,"feridos_leves",23
+"Vento","Anoitecer",2018,"feridos_leves",3
+"Céu Claro","Plena Noite",2018,"feridos_leves",10869
+"Chuva","Plena Noite",2018,"feridos_leves",2319
+"Garoa/Chuvisco","Plena Noite",2018,"feridos_leves",742
+"Ignorado","Plena Noite",2018,"feridos_leves",472
+"Nevoeiro/Neblina","Plena Noite",2018,"feridos_leves",260
+"Nublado","Plena Noite",2018,"feridos_leves",3933
+"Sol","Plena Noite",2018,"feridos_leves",7
+"Vento","Plena Noite",2018,"feridos_leves",91
+"Céu Claro","Pleno dia",2018,"feridos_leves",18278
+"Chuva","Pleno dia",2018,"feridos_leves",4659
+"Garoa/Chuvisco","Pleno dia",2018,"feridos_leves",966
+"Ignorado","Pleno dia",2018,"feridos_leves",176
+"Nevoeiro/Neblina","Pleno dia",2018,"feridos_leves",126
+"Nublado","Pleno dia",2018,"feridos_leves",5156
+"Sol","Pleno dia",2018,"feridos_leves",4710
+"Vento","Pleno dia",2018,"feridos_leves",21
+"Céu Claro","Amanhecer",2019,"feridos_leves",1538
+"Chuva","Amanhecer",2019,"feridos_leves",283
+"Garoa/Chuvisco","Amanhecer",2019,"feridos_leves",143
+"Granizo","Amanhecer",2019,"feridos_leves",0
+"Ignorado","Amanhecer",2019,"feridos_leves",58
+"Nevoeiro/Neblina","Amanhecer",2019,"feridos_leves",182
+"Nublado","Amanhecer",2019,"feridos_leves",644
+"Sol","Amanhecer",2019,"feridos_leves",61
+"Vento","Amanhecer",2019,"feridos_leves",3
+"Céu Claro","Anoitecer",2019,"feridos_leves",2016
+"Chuva","Anoitecer",2019,"feridos_leves",460
+"Garoa/Chuvisco","Anoitecer",2019,"feridos_leves",163
+"Granizo","Anoitecer",2019,"feridos_leves",3
+"Ignorado","Anoitecer",2019,"feridos_leves",52
+"Nevoeiro/Neblina","Anoitecer",2019,"feridos_leves",4
+"Nublado","Anoitecer",2019,"feridos_leves",724
+"Sol","Anoitecer",2019,"feridos_leves",28
+"Vento","Anoitecer",2019,"feridos_leves",14
+"Céu Claro","Plena Noite",2019,"feridos_leves",11405
+"Chuva","Plena Noite",2019,"feridos_leves",2243
+"Garoa/Chuvisco","Plena Noite",2019,"feridos_leves",869
+"Ignorado","Plena Noite",2019,"feridos_leves",512
+"Neve","Plena Noite",2019,"feridos_leves",1
+"Nevoeiro/Neblina","Plena Noite",2019,"feridos_leves",298
+"Nublado","Plena Noite",2019,"feridos_leves",4070
+"Sol","Plena Noite",2019,"feridos_leves",9
+"Vento","Plena Noite",2019,"feridos_leves",67
+"Céu Claro","Pleno dia",2019,"feridos_leves",19435
+"Chuva","Pleno dia",2019,"feridos_leves",4157
+"Garoa/Chuvisco","Pleno dia",2019,"feridos_leves",1001
+"Granizo","Pleno dia",2019,"feridos_leves",1
+"Ignorado","Pleno dia",2019,"feridos_leves",129
+"Nevoeiro/Neblina","Pleno dia",2019,"feridos_leves",131
+"Nublado","Pleno dia",2019,"feridos_leves",4986
+"Sol","Pleno dia",2019,"feridos_leves",4780
+"Vento","Pleno dia",2019,"feridos_leves",30
+"Céu Claro","Amanhecer",2018,"feridos_graves",449
+"Chuva","Amanhecer",2018,"feridos_graves",90
+"Garoa/Chuvisco","Amanhecer",2018,"feridos_graves",32
+"Granizo","Amanhecer",2018,"feridos_graves",1
+"Ignorado","Amanhecer",2018,"feridos_graves",33
+"Nevoeiro/Neblina","Amanhecer",2018,"feridos_graves",62
+"Nublado","Amanhecer",2018,"feridos_graves",174
+"Sol","Amanhecer",2018,"feridos_graves",18
+"Vento","Amanhecer",2018,"feridos_graves",5
+"Céu Claro","Anoitecer",2018,"feridos_graves",640
+"Chuva","Anoitecer",2018,"feridos_graves",144
+"Garoa/Chuvisco","Anoitecer",2018,"feridos_graves",14
+"Granizo","Anoitecer",2018,"feridos_graves",0
+"Ignorado","Anoitecer",2018,"feridos_graves",30
+"Nevoeiro/Neblina","Anoitecer",2018,"feridos_graves",2
+"Nublado","Anoitecer",2018,"feridos_graves",220
+"Sol","Anoitecer",2018,"feridos_graves",8
+"Vento","Anoitecer",2018,"feridos_graves",2
+"Céu Claro","Plena Noite",2018,"feridos_graves",4165
+"Chuva","Plena Noite",2018,"feridos_graves",678
+"Garoa/Chuvisco","Plena Noite",2018,"feridos_graves",222
+"Ignorado","Plena Noite",2018,"feridos_graves",197
+"Nevoeiro/Neblina","Plena Noite",2018,"feridos_graves",67
+"Nublado","Plena Noite",2018,"feridos_graves",1499
+"Sol","Plena Noite",2018,"feridos_graves",3
+"Vento","Plena Noite",2018,"feridos_graves",23
+"Céu Claro","Pleno dia",2018,"feridos_graves",4993
+"Chuva","Pleno dia",2018,"feridos_graves",1012
+"Garoa/Chuvisco","Pleno dia",2018,"feridos_graves",217
+"Ignorado","Pleno dia",2018,"feridos_graves",94
+"Nevoeiro/Neblina","Pleno dia",2018,"feridos_graves",28
+"Nublado","Pleno dia",2018,"feridos_graves",1308
+"Sol","Pleno dia",2018,"feridos_graves",1271
+"Vento","Pleno dia",2018,"feridos_graves",5
+"Céu Claro","Amanhecer",2019,"feridos_graves",552
+"Chuva","Amanhecer",2019,"feridos_graves",100
+"Garoa/Chuvisco","Amanhecer",2019,"feridos_graves",26
+"Granizo","Amanhecer",2019,"feridos_graves",0
+"Ignorado","Amanhecer",2019,"feridos_graves",33
+"Nevoeiro/Neblina","Amanhecer",2019,"feridos_graves",41
+"Nublado","Amanhecer",2019,"feridos_graves",192
+"Sol","Amanhecer",2019,"feridos_graves",18
+"Vento","Amanhecer",2019,"feridos_graves",8
+"Céu Claro","Anoitecer",2019,"feridos_graves",646
+"Chuva","Anoitecer",2019,"feridos_graves",121
+"Garoa/Chuvisco","Anoitecer",2019,"feridos_graves",49
+"Granizo","Anoitecer",2019,"feridos_graves",1
+"Ignorado","Anoitecer",2019,"feridos_graves",31
+"Nevoeiro/Neblina","Anoitecer",2019,"feridos_graves",4
+"Nublado","Anoitecer",2019,"feridos_graves",224
+"Sol","Anoitecer",2019,"feridos_graves",11
+"Vento","Anoitecer",2019,"feridos_graves",4
+"Céu Claro","Plena Noite",2019,"feridos_graves",4473
+"Chuva","Plena Noite",2019,"feridos_graves",724
+"Garoa/Chuvisco","Plena Noite",2019,"feridos_graves",268
+"Ignorado","Plena Noite",2019,"feridos_graves",198
+"Neve","Plena Noite",2019,"feridos_graves",0
+"Nevoeiro/Neblina","Plena Noite",2019,"feridos_graves",89
+"Nublado","Plena Noite",2019,"feridos_graves",1452
+"Sol","Plena Noite",2019,"feridos_graves",0
+"Vento","Plena Noite",2019,"feridos_graves",50
+"Céu Claro","Pleno dia",2019,"feridos_graves",5391
+"Chuva","Pleno dia",2019,"feridos_graves",967
+"Garoa/Chuvisco","Pleno dia",2019,"feridos_graves",212
+"Granizo","Pleno dia",2019,"feridos_graves",0
+"Ignorado","Pleno dia",2019,"feridos_graves",77
+"Nevoeiro/Neblina","Pleno dia",2019,"feridos_graves",28
+"Nublado","Pleno dia",2019,"feridos_graves",1229
+"Sol","Pleno dia",2019,"feridos_graves",1348
+"Vento","Pleno dia",2019,"feridos_graves",6
