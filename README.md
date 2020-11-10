@@ -7,10 +7,12 @@ Acesse o aplicativo em: [Acidente de Trânsito](https://larissamoreno.shinyapps.
 
 ## Introdução 
 
-Para atingirmos o objetivo de avaliar a qualidade do transito, iremos observar o cenário complementar, por exemplo, ao invés de observarmos pontos positivos sobre o trânsito, iremos observar pontos negativos, como acidentes e mortes. 
 
+No Brasil, nos últimos anos, em decorrência da estabilidade econômica, o que estimula a compra de bens como o carro, e ao aumento da população, o volume de carros tem aumentado significativamente. Com esse aumento de carros surgi o problema com o tráfego motorizado em essencial os acidentes de trânsitos. 
 
-Segundo o site do CNJ: https://www.cnt.org.br/agencia-cnt/cnt-lanca-painel-sobre-acidentes-rodoviarios-veja-principais-dados " O Brasil registra 14 mortes nas rodovias federais a cada dia". Dados alarmantes que motivaram a escolha desse tema e subtema. 
+As mortes por acidentes de trãnsitos é um grande problema de saúde mundial, segundo a OMS no ano de 2018 1,35 milhão de óbitos por ano, o que configura 2.5% das mortes pelo mundo, ocupando a oitava colocação do ranking de causas de mortes para pessoas de todas as idades e a primeira colocação de causas de mortes para pessoas na faixa etária de 5 a 29 anos. Por essa razão, a Organização das Nações Unidas (ONU) estipulou três metas para os problemas relacionadas ao transito a primeira é diminuir as mortes e lesões no transito em 50%, a segunda é que todas as novas vias tenham um padrão, ou que tenha uma qualidade acima de 3 estrelas, para fornecer mais segurança para os motoristas, pedestres, ciclista e a terceira é que 75% das vias do país atendam esses novos padrões, essas metas foram prolongadas por mais uma década, já que boa parte dos países não conseguiram atingi-la.
+
+No Brasil a taxa de mortalidade no trânsito era de 20% por 100.000 habitante e segundo o site do CNJ: https://www.cnt.org.br/agencia-cnt/cnt-lanca-painel-sobre-acidentes-rodoviarios-veja-principais-dados " O Brasil registra 14 mortes nas rodovias federais a cada dia". Dados alarmantes que motivaram a escolha desse tema e subtema. 
 
 
 ## Objetivos 
@@ -19,7 +21,13 @@ Avaliar a qualidade do trânsito no Brasil com base nos dados de 2017 a 2020.
 
 Levantando questões sobre os acidentes como: quantidade, causa, horários, qual o tipo, classificação, condição meteorológica, quantidade de pessoas envolvidas, mortes no momento, número de indivíduos envolvidos no acidente, nos estados do Brasil. 
 
-Qualidade no trânsito envolve diversos fatores, nesse projeto iremos dar ênfase no trânsito das rodovias federais, e um bom indicativo da segurança nas estradas é a taxa de acidentes e mortes, onde quanto menor melhor. 
+## Como é possível medir qualidade no trânsito?
+
+Bom, isso envolve diversos fatores como: tempo de permanência no trânsito diária, qualidade da via,  bem como iluminação, sinalização, entre outros fatores que influenciam na quantidade de acidentes.  Neste aplicativo iremos trabalhar com as questões relacionadas com  os acidentes de trânsito focando nas rodovias federais.
+
+Assim damos ao usuário por mesios desse shiny a possibilidade de obter diversas informações relevantes para o tema, como: número de acidentes por hora e por dia da semana, com a opção de filtrar por UF, tipo de acidente ou ainda escolher o ano a ser visualizado. Além disso, podemos analisar a frequência das causas dos acidentes ocorridos por data, em uma visualização clara dos dados. Também é possível visualizar uma tabela que relaciona o tipo de acidente com a causa do acidente por ano.
+
+O aplicativo shiny conta também com um mapa do Brasil em que pode-se examinar conforme o usuário interage com mapa as respectivas frequências de acidentes naquele local, com o filtro por ano.
 
 
 ## Recursos necessários
