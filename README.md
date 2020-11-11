@@ -43,7 +43,7 @@ Disponibilidade de banco de dados consistentes e que abranjam todas as variávei
 
 ## Referências
 
-CSS Tutorial: https://www.w3schools.com/css/default.asp
+CSS Tutorial: [link](https://www.w3schools.com/css/default.asp)
 
 A atualidade dos acidentes de trânsito na era da velocidade: uma visão geral: [link](https://www.scielo.br/scielo.php?script=sci_arttext&pid=S0102-311X2000000100002)
 
