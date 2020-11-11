@@ -45,15 +45,15 @@ Disponibilidade de banco de dados consistentes e que abranjam todas as variávei
 
 CSS Tutorial: https://www.w3schools.com/css/default.asp
 
-A atualidade dos acidentes de trânsito na era da velocidade: uma visão geral: https://www.scielo.br/scielo.php?script=sci_arttext&pid=S0102-311X2000000100002
+A atualidade dos acidentes de trânsito na era da velocidade: uma visão geral: [link](https://www.scielo.br/scielo.php?script=sci_arttext&pid=S0102-311X2000000100002)
 
-JORNAL DA USP; Acidentes de trânsito no Brasil, um problema de saúde pública: https://jornal.usp.br/atualidades/acidentes-de-transito-no-brasil-um-problema-de-saude-publica/
+JORNAL DA USP; Acidentes de trânsito no Brasil, um problema de saúde pública: [link](https://jornal.usp.br/atualidades/acidentes-de-transito-no-brasil-um-problema-de-saude-publica/)
 
-7 dicas de segurança no trânsito: aprenda aqui e evite problemas: https://www.sofit4.com.br/blog/dicas-seguranca-no-transito/
+7 dicas de segurança no trânsito: aprenda aqui e evite problemas: [link](https://www.sofit4.com.br/blog/dicas-seguranca-no-transito/)
 
-Dicas e boas práticas para um trânsito mais seguro: https://frotas.unidas.com.br/blog/transito-mais-seguro/
+Dicas e boas práticas para um trânsito mais seguro: [link](https://frotas.unidas.com.br/blog/transito-mais-seguro/)
 
-
+CNT lança painel sobre acidentes rodoviários; veja os principais dados: [link](https://www.cnt.org.br/agencia-cnt/cnt-lanca-painel-sobre-acidentes-rodoviarios-veja-principais-dados)
 ## Colaboradores
 1.Carolina Gomes Casado de Carvalho 
 
