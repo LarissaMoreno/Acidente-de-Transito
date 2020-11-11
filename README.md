@@ -40,6 +40,16 @@ O aplicativo shiny conta também com um mapa do Brasil em que pode-se examinar c
 ## Limitações
 Disponibilidade de banco de dados consistentes e que abranjam todas as variáveis relacionadas ao trânsito e qualidade desses bancos. 
 
+
+## Referências
+
+CSS Tutorial: https://www.w3schools.com/css/default.asp
+A atualidade dos acidentes de trânsito na era da velocidade: uma visão geral: https://www.scielo.br/scielo.php?script=sci_arttext&pid=S0102-311X2000000100002
+JORNAL DA USP; Acidentes de trânsito no Brasil, um problema de saúde pública: https://jornal.usp.br/atualidades/acidentes-de-transito-no-brasil-um-problema-de-saude-publica/
+7 dicas de segurança no trânsito: aprenda aqui e evite problemas: https://www.sofit4.com.br/blog/dicas-seguranca-no-transito/
+Dicas e boas práticas para um trânsito mais seguro: https://frotas.unidas.com.br/blog/transito-mais-seguro/
+
+
 ## Colaboradores
 1.Carolina Gomes Casado de Carvalho 
 
