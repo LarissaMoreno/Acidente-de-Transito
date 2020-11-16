@@ -1,24 +1,23 @@
-library(flexdashboard)
+library(shiny)
+library(shinyWidgets)
 library(readr)
 library(readxl)
 library(ggplot2)
-library(DT)
 library(dplyr)
-library(shiny)
 library(lubridate)
 library(stringr)
 library(leaflet)
-library(stats)
 library(tidyverse)
 library(geojsonio)
 library(stats)
 library(directlabels)
-library(shinyWidgets)
+library(DT)
 
 states <- geojson_read("https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/brazil-states.geojson",  what = "sp")
 dados=readRDS("total.rds")
 mortalidade1 <- read_excel("mortalidade1.xlsx")
 tentativa <- read_excel("tentativa.xlsx")
+df1 <- read.csv("fase_dia.csv", sep=",")
 
 dados$horas=substring(dados$horario,1,2)
 dados$uso_solo[dados$uso_solo=="Sim"]="Urbano"
@@ -34,7 +33,7 @@ tentativa$Total=as.numeric(tentativa$Total)
 
 
 note = expression(paste(italic("Note: "), "Fonte: MS/SVS/CGIAE - Sistema de Informações sobre Mortalidade - SIM"))
-df1 <- read.csv("fase_dia.csv", sep=",")
+
 
 
 
@@ -42,12 +41,14 @@ df1 <- read.csv("fase_dia.csv", sep=",")
 ui = tagList(
   navbarPage(id= "navibar",
              tags$style(HTML("
+                             
+                             
                              .navbar { background-color: #1B998B;}
                              .navbar-default .navbar-nav > li > a {color:white;}
                              .navbar-default .navbar-nav > .active > a,
                              .navbar-default .navbar-nav > .active > a:focus,
                              .navbar-nav > li > a, .navbar {min-height:60px !important;}
-                          
+                             
                              .shiny-input-panel{padding: 0px 0px !important;}
                              .tabbable > .nav > li > a[data-value='Mortalidade'] {background-color: #1B998B; color:white}
                              .tabbable > .nav > li > a[data-value='Home'] {background-color: #1B998B; color:white}
@@ -210,7 +211,7 @@ ui = tagList(
              
                                 )
                       )
-shinyApp(ui,server)
+
 
 server=function(input,output){
   output$image1=renderImage({
