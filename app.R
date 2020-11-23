@@ -12,6 +12,10 @@ library(geojsonio)
 library(stats)
 library(directlabels)
 library(DT)
+library(plotly)
+library(formattable)
+require(data.table)
+detach("package:data.table")
 
 states <- geojson_read("https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/brazil-states.geojson",  what = "sp")
 dados=readRDS("total.rds")
@@ -125,26 +129,47 @@ ui = tagList(
                                            mainPanel(splitLayout( cellWidths = c("70%", "70%"),plotOutput("plot1"), plotOutput("plot2")) ))
                                            )),
              ###########################################2 Painel
-             tabPanel("Mapa",icon = icon("map-marked-alt"),
-                      inputPanel(style = 'background-color: #B5BCB3;',
-                                 selectInput("ano3","ano",choices =c(2018,2019)),
-                                 selectInput("tipo","tipo de acidente",choices =unique(dados$tipo_acidente)),
-                                 selectInput("uf","uf",choices= list("Norte" = list("AC","AM","AP","TO","PA","RR","RO"),
-                                                                     "Nordeste" = list("CE","AL","BA","MA","PA","PE",
-                                                                                       "PI","RN","SE"),
-                                                                     "Centro-Oeste" = list("GO","MT","MS","DF"),
-                                                                     "Sudeste"=list("ES","MG","RJ","SP"),
-                                                                     "Sul"=list("PR","SC","RS")),selected = "DF")),
-                      
-                      mainPanel(splitLayout(cellWidths = c("70%","80%"),plotOutput("plot4"),leafletOutput("plot3"))),
-                      column(8,mainPanel(style = "position: relative;left: -30px;padding: 35px;",plotOutput("plot5",width = "120%")))),
+            #tabPanel("Mapa",icon = icon("map-marked-alt"),
+            #         inputPanel(style = 'background-color: #B5BCB3;',
+            #                    selectInput("ano3","ano",choices =c(2018,2019)),
+            #                    selectInput("tipo","tipo de acidente",choices =unique(dados$tipo_acidente)),
+            #                    selectInput("uf","uf",choices= list("Norte" = list("AC","AM","AP","TO","PA","RR","RO"),
+            #                                                        "Nordeste" = list("CE","AL","BA","MA","PA","PE",
+            #                                                                          "PI","RN","SE"),
+            #                                                        "Centro-Oeste" = list("GO","MT","MS","DF"),
+            #                                                        "Sudeste"=list("ES","MG","RJ","SP"),
+            #                                                        "Sul"=list("PR","SC","RS")),selected = "DF")),
+            #         
+            #         mainPanel(splitLayout(cellWidths = c("70%","80%"),plotlyOutput("plot4"),leafletOutput("plot3"))),
+            #         column(8,mainPanel(style = "position: relative;left: -30px;padding: 35px;",plotlyOutput("plot5",width = "120%")) )),
+            #
+            #   
+            
+           tabPanel("Mapa",icon = icon("map-marked-alt"),
+                    inputPanel(style = 'background-color: #B5BCB3;',
+                               selectInput("ano3","Ano",choices =c(2018,2019)),
+                               selectInput("tipo","Tipo de Acidente",choices =unique(dados$tipo_acidente)),
+                               selectInput("uf","UF",choices= list("Norte" = list("AC","AM","AP","TO","PA","RR","RO"),
+                                                                   "Nordeste" = list("CE","AL","BA","MA","PA","PE",
+                                                                                     "PI","RN","SE"),
+                                                                   "Centro-Oeste" = list("GO","MT","MS","DF"),
+                                                                   "Sudeste"=list("ES","MG","RJ","SP"),
+                                                                   "Sul"=list("PR","SC","RS")),selected = "DF")),
+                     fluidRow(mainPanel( style="position: relative;left: -30px;padding: 35px;",plotlyOutput("plot4",width = "75%")),
+                              mainPanel(style="position: relative;left: 700px;bottom:500px;padding: 35px;",leafletOutput("plot3",width = "75%"))),
+                     fluidRow(  mainPanel(style="height:1px;position: relative;left: 700px;bottom:500px;padding: 35px;",leafletOutput("plot99",width = "75%")),
+                                mainPanel(style="height:1px;position: relative;left: -30px;bottom:570px;padding: 35px;",plotlyOutput("plot5",width = "75%"))),
+                     #fluidRow(mainPanel(style="height:300px;position: relative;left: 250px;bottom:200px;padding: 35px;",plotlyOutput("solo")))
+            ),            
+
+             
              ############################################3 Painel
              tabPanel("Classificação dos Acidentes",icon = icon("car"),
                       inputPanel(style = 'background-color: #B5BCB3;',
-                                 selectInput("ano1","ano",choices =unique(dados$ano)),
-                                 selectInput("causa","causa do acidente",choices =unique(dados$causa_acidente))),
+                                 selectInput("ano1","Ano",choices =unique(dados$ano)),
+                                 selectInput("causa","Causa do Acidente",choices =unique(dados$causa_acidente))),
                       mainPanel(splitLayout(cellWidths = c("90%","60%"),plotOutput("plot6",width = "100%",height = "630px"), 
-                                            DTOutput("plot7")) )
+                                            DT::dataTableOutput("plot7")) )
              ),
              ############################################4 Painel
              tabPanel("Condição Meteoroliga",icon = icon("umbrella"),
@@ -157,11 +182,11 @@ ui = tagList(
                                  selectInput("ano2","ano",choices =unique(dados$ano)),
                                  selectInput("cond","condição",choices = unique(dados$condicao_metereologica))
                       ),
-                      fluidRow(mainPanel( style="position: relative;left: 100px;padding: 35px;",plotOutput("p1",width = "50%")),
-                               mainPanel(style="position: relative;left: 700px;bottom:475px;padding: 35px;",plotOutput("p2",width = "50%"))),
-                      fluidRow(  mainPanel(style="height:1px;position: relative;left: 700px;bottom:500px;padding: 35px;",plotOutput("p3",width = "50%")),
-                                 mainPanel(style="height:1px;position: relative;left: 100px;bottom:570px;padding: 35px;",plotOutput("p4",width = "50%"))),
-                      fluidRow(mainPanel(style="height:300px;position: relative;left: 250px;bottom:200px;padding: 35px;",plotOutput("solo")))
+                      fluidRow(mainPanel( style="position: relative;left: 100px;padding: 35px;",plotlyOutput("p1",width = "50%")),
+                               mainPanel(style="position: relative;left: 700px;bottom:475px;padding: 35px;",plotlyOutput("p2",width = "50%"))),
+                      fluidRow(  mainPanel(style="height:1px;position: relative;left: 700px;bottom:500px;padding: 35px;",plotlyOutput("p3",width = "50%")),
+                                 mainPanel(style="height:1px;position: relative;left: 100px;bottom:570px;padding: 35px;",plotlyOutput("p4",width = "50%"))),
+                      fluidRow(mainPanel(style="height:300px;position: relative;left: 250px;bottom:200px;padding: 35px;",plotlyOutput("solo")))
                       ),
              #########################################5 painel
              tabPanel("",icon = icon("fab fa-info-circle"),value = "home",
@@ -204,7 +229,7 @@ ui = tagList(
                                    distrações.")),
                       wellPanel(style = "color: black; background-color:#B5BCB3;width:50%;",
                                 h2("O que fazer quando ocorre um acidente ",style="position: relative;left: 30px;"),
-                                h5("Em primeiro lugar, verifique alguém se feriu. Se houver uma vítima no acidente de trânsito, independentemente da gravidade, ligue para o 
+                                h5("Em primeiro lugar, verifique se alguém se feriu. Se houver uma vítima no acidente de trânsito, independentemente da gravidade, ligue para o 
                                    Serviço de Atendimento Móvel de Urgência (SAMU), por meio do telefone 192, e sinalize a batida. A polícia deve ser acionada sempre que alguém
                                    se machucar. Nesses casos, o boletim de ocorrência (B.O.) para acidentes de trânsito é realizado pelo agente no local.")))
              
@@ -285,22 +310,55 @@ server=function(input,output){
       addMeasure(position = "bottomleft")
   })
   
-  output$plot4=renderPlot({
+ 
+  ##############################################
+  
+  output$plot99=renderLeaflet({
+    datatran2019=dados%>%filter(ano %in% input$ano3)
+    datatran2019$ponto<-1
+    states2<-merge(x=states,y=as.data.frame(table(datatran2019$uf)),by.x='sigla',by.y='Var1')
+    datatran2019%>%leaflet() %>%
+      addTiles() %>%  
+      addCircleMarkers(
+        lng = datatran2019$long, 
+        lat = datatran2019$lat, 
+        radius = log(datatran2019$ponto), 
+        label = datatran2019$datedate, 
+        clusterOptions = markerClusterOptions())%>% 
+      addMeasure(position = "bottomleft")
+  })
+  
+  ###############################################
+  
+   
+  
+  
+  
+  output$plot4=renderPlotly({
     line=dados%>%
       filter(uf %in% input$uf & ano %in% input$ano3 & tipo_acidente %in% input$tipo)%>%
       group_by(horas)%>%summarise(n=n())
     line$horas<-as.numeric(line$horas)
-    ggplot(line,aes(x=horas,y=n))+geom_line(size=1.2,color="#1B998B")+
-      scale_x_continuous("horas", labels = as.character(paste(line$horas,"h",sep="")), 
-                         breaks = line$horas)+
-      labs(y="Frequ?ncia")+
-      theme_classic()+
-      xlab("Horário")+ggtitle("Número de Acidentes por horário")
+    #ggplot(line,aes(x=horas,y=n))+geom_line(size=1.2,color="#1B998B")+
+    #  scale_x_continuous("horas", labels = as.character(paste(line$horas,"h",sep="")), 
+    #                     breaks = line$horas)+
+    #  labs(y="Frequ?ncia")+
+    #  theme_classic()+
+    #  xlab("Horário")+ggtitle("Número de Acidentes por horário")
+    plot_ly(x = ~line$horas, y = ~line$n, mode = 'lines',
+            hoverinfo = "text",
+            text = ~paste("UF:", input$uf, "<br>",
+                          "Ano:",input$ano3,"<br>",
+                          "Tipo:",input$tipo,"<br>",
+                          "Acidentes:", line$n, "<br>",
+                          "Horário:", line$horas))%>%
+      layout(title='Número de Acidentes por horário',xaxis=list(title='Horário'), 
+             yaxis=list(title='Frequência',type='category'))
     
   })  
   
   
-  output$plot5=renderPlot({
+  output$plot5=renderPlotly({
     barras=dados%>%
       filter(uf %in% input$uf & ano %in% input$ano3 & tipo_acidente %in% input$tipo)%>%
       group_by(dia_semana)%>%summarise(n=n())%>%mutate(proporcao = (n/sum(n))*100)
@@ -313,13 +371,19 @@ server=function(input,output){
     
     barras=barras[order(barras$dia), ]
     
-    ggplot() + geom_bar(aes(x = dia, y = Acidentes),fill="#1B998B", 
-                        data = barras, stat = 'identity')+
-      labs(x="Dia da semana",y="Frequ?ncia")+
-      geom_text(data=barras,aes(x = dia, y = Acidentes,label=paste0(round(proporcao,3),"%")),
-                vjust=-0.25,check_overlap = T,position = position_dodge(width = 0.9))+
-      theme(axis.text.x = element_text(angle = 30))+
-      ggtitle("Número de Acidentes por dia da Semana")
+    #ggplot() + geom_bar(aes(x = dia, y = Acidentes),fill="#1B998B", 
+    #                    data = barras, stat = 'identity')+
+    #  labs(x="Dia da semana",y="Porcentagem")+
+    #  geom_text(data=barras,aes(x = dia, y = Acidentes,label=paste0(round(proporcao,3),"%")),
+    #            vjust=-0.25,check_overlap = T,position = position_dodge(width = 0.9))+
+    #  theme(axis.text.x = element_text(angle = 30))+
+    #  ggtitle("Número de Acidentes por dia da Semana")+
+    #  theme_bw() +
+    #  theme(panel.border = element_blank(),
+    #        axis.line = element_line(colour = "black"))
+    barras%>%plot_ly(x=~dia, y=~Acidentes,hoverinfo = "text",text = ~paste("UF:", input$uf, "<br>","Ano:",input$ano3,"<br>","Tipo:",input$tipo,"<br>","Acidentes:",Acidentes, "<br>","Dia:", dia))%>%
+                     add_bars()%>%
+                     layout(title='Número de Acidentes por Dia da Semana',xaxis=list(title='Dia da Semana'),yaxis=list(title='Frequência'))
     
   })
   
@@ -357,69 +421,97 @@ server=function(input,output){
       ggtitle("Calendário do Número de Acidentes por Causa")
   })
   
-  output$plot7=renderDT({
+  output$plot7=DT::renderDataTable({
     table=dados%>%filter(causa_acidente %in% input$causa & ano %in% input$ano1)%>%
       select(tipo_acidente) %>%
       group_by(tipo_acidente) %>%
       summarise(frequencia = n())%>%arrange(desc(frequencia))
     table$porcentagem=round(table$frequencia/sum(table$frequencia),3)
     colnames(table)=c("Tipo de Acidente","Frequência","Porcentagem")
-    datatable(table,
-              rownames = FALSE, 
-              options = list(pageLength = 16,dom = 't',
-                             headerCallback = JS(
-                               "function( thead, data, start, end, display ) {
-                               $(thead).closest('thead').find('th').eq(3).css('color', 'red');
-                               $(thead).closest('thead').find('th').eq(4).css('color', 'red');
-                               $(thead).closest('thead').find('th').eq(5).css('color', 'blue');
-                               $(thead).closest('thead').find('th').eq(6).css('color', 'blue');
-  }"
-                             ),
-                             initComplete = JS(
-                               "function(settings, json) {",
-                               "$(this.api().table().header()).css({'background-color': '#000', 'color': '#fff'});",
-                               "}")
-                             ))
+#    datatable(table,
+#              rownames = FALSE, 
+#              options = list(pageLength = 16,dom = 't',
+#                             headerCallback = JS(
+#                               "function( thead, data, start, end, display ) {
+#                               $(thead).closest('thead').find('th').eq(3).css('color', 'red');
+#                               $(thead).closest('thead').find('th').eq(4).css('color', 'red');
+#                               $(thead).closest('thead').find('th').eq(5).css('color', 'blue');
+#                               $(thead).closest('thead').find('th').eq(6).css('color', 'blue');
+#  }"
+#                             ),
+#                             initComplete = JS(
+#                               "function(settings, json) {",
+#                               "$(this.api().table().header()).css({'background-color': '#000', 'color': '#fff'});",
+#                               "}")
+#                             ))
+    
+    require(data.table)
+    as.datatable(formattable(table, align = "l", list(
+      area(col = c(1)) ~ formatter("span", style = ~ style(color = "grey", font.weight = "bold")), 
+      area(col = 2) ~ color_tile("#DeF7E9", "#71CA97"),
+      area(col = 3) ~ color_tile("#FFFFFF", "orange")
+    )))
+    
+    
+    
 })
   
   react=reactive({
     ex1=df1%>%filter(condicao_metereologica %in% input$cond & ano %in% input$ano2)
     
   })
-  output$p1=renderPlot({
+  output$p1=renderPlotly({
     
-    ggplot(subset(react(),fase_dia == "Amanhecer"), aes(x = feridos , y= n)) +
-      geom_bar(position="dodge", stat = "identity",fill="#1B998B")+
-      ggtitle("Número de Acidentes no Amanhecer")
+    #ggplot(subset(react(),fase_dia == "Amanhecer"), aes(x = feridos , y= n)) +
+    #  geom_bar(position="dodge", stat = "identity",fill="#1B998B")+
+    #  ggtitle("Número de Acidentes no Amanhecer")
+    subset(react(),fase_dia == "Amanhecer")%>%plot_ly(x=~n, y=~feridos,hoverinfo = "text",text = ~paste("UF:", input$uf, "<br>","Ano:",input$ano3,"<br>","Tipo:",input$tipo,"<br>",feridos,":",n))%>%
+      add_bars(opacity = .5)%>%
+      layout(title='Número de Acidentes no Amanhecer',xaxis=list(title='Frequência'),yaxis=list(title=''))
   })  
-  output$p2=renderPlot({
+  output$p2=renderPlotly({
     
-    ggplot(subset(react(),fase_dia == "Anoitecer"), aes(x = feridos , y= n)) +
-      geom_bar(position="dodge", stat = "identity",fill="#1B998B")+
-      ggtitle("Número de Acidentes no Anoitecer")
+    #ggplot(subset(react(),fase_dia == "Anoitecer"), aes(x = feridos , y= n)) +
+    #  geom_bar(position="dodge", stat = "identity",fill="#1B998B")+
+    #  ggtitle("Número de Acidentes no Anoitecer")
+    subset(react(),fase_dia == "Anoitecer")%>%plot_ly(x=~n, y=~feridos,hoverinfo = "text",text = ~paste("UF:", input$uf, "<br>","Ano:",input$ano3,"<br>","Tipo:",input$tipo,"<br>",feridos,":",n))%>%
+      add_bars(color=I('#1B998B'),opacity = .5)%>%
+      layout(title='Número de Acidentes no Anoitecer',xaxis=list(title='Frequência'),yaxis=list(title=''))
   })
-  output$p3=renderPlot({
+  output$p3=renderPlotly({
     
-    ggplot(subset(react(),fase_dia == "Plena Noite"), aes(x = feridos , y= n)) +
-      geom_bar(position="dodge", stat = "identity",fill="#1B998B")+
-      ggtitle("Número de Acidentes em Plena Noite")
+    #ggplot(subset(react(),fase_dia == "Plena Noite"), aes(x = feridos , y= n)) +
+    #  geom_bar(position="dodge", stat = "identity",fill="#1B998B")+
+    #  ggtitle("Número de Acidentes em Plena Noite")
+    subset(react(),fase_dia == "Plena Noite")%>%plot_ly(x=~n, y=~feridos,hoverinfo = "text",text = ~paste("UF:", input$uf, "<br>","Ano:",input$ano3,"<br>","Tipo:",input$tipo,"<br>",feridos,":",n))%>%
+      add_bars(color=I('#1B998B'),opacity = 1)%>%
+      layout(title='Número de Acidentes em Plena Noite',xaxis=list(title='Frequência'),yaxis=list(title=''))
   })
-  output$p4=renderPlot({
+  output$p4=renderPlotly({
     
-    ggplot(subset(react(),fase_dia == "Pleno dia"), aes(x = feridos , y= n)) +
-      geom_bar(position="dodge", stat = "identity",fill="#1B998B")+
-      ggtitle("Número de Acidentes em Pleno dia")
+    #ggplot(subset(react(),fase_dia == "Pleno dia"), aes(x = feridos , y= n)) +
+    #  geom_bar(position="dodge", stat = "identity",fill="#1B998B")+
+    #  ggtitle("Número de Acidentes em Pleno dia")
+    subset(react(),fase_dia == "Pleno dia")%>%plot_ly(x=~n, y=~feridos,hoverinfo = "text",text = ~paste("UF:", input$uf, "<br>","Ano:",input$ano3,"<br>","Tipo:",input$tipo,"<br>",feridos,":",n))%>%
+      add_bars(opacity = 1)%>%
+      layout(title='Número de Acidentes em Pleno dia',xaxis=list(title='Frequência'),yaxis=list(title=''))
   })
   
   
   
-  output$solo=renderPlot({
-    df2=dados%>%group_by(ano,condicao_metereologica,uso_solo,horas)%>%summarise(n=n())%>%
-      filter(condicao_metereologica %in% input$cond & ano %in% input$ano2)
-    ggplot(df2,aes(x=horas,y=n, group = uso_solo ,colour=uso_solo))+geom_line()+
-      labs(colour="Local",y="FrequÊncia",x="Horas")+
-      scale_color_manual(values=c("blue", "red"))+
-      ggtitle("Número de Acidente de Acordo com o Horário")
+  output$solo=renderPlotly({
+    #df2=dados%>%group_by(ano,condicao_metereologica,uso_solo,horas)%>%summarise(n=n())%>%
+    #  filter(condicao_metereologica %in% input$cond & ano %in% input$ano2)
+    #ggplot(df2,aes(x=horas,y=n, group = uso_solo ,colour=uso_solo))+geom_line()+
+    #  labs(colour="Local",y="FrequÊncia",x="Horas")+
+    #  scale_color_manual(values=c("blue", "red"))+
+    #  ggtitle("Número de Acidente de Acordo com o Horário")
+    
+    dados%>%group_by(ano,condicao_metereologica,uso_solo,horas)%>%summarise(n=n())%>%
+      filter(condicao_metereologica %in% input$cond & ano %in% input$ano2)%>%
+      plot_ly(x = ~horas, y = ~n, color = ~uso_solo,hoverinfo = "text",text = ~paste("Brasil","<br>","Ano:",input$ano3,"<br>","Horário:",horas,"<br>","Acidentes:",n))%>%
+      add_lines()%>%
+      layout(title='Número de Acidente de Acordo com o Horário',xaxis=list(title='Horário'),yaxis=list(title='Frequência'))
     
   })  
 }
