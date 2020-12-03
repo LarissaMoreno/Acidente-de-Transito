@@ -64,3 +64,6 @@ CNT lança painel sobre acidentes rodoviários; veja os principais dados: [link]
 
 5.Larissa Moreno Silva 
 
+## Orientador
+1. prof. David Duarte Lima
+
