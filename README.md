@@ -15,6 +15,7 @@ As mortes por acidentes de trãnsitos é um grande problema de saúde mundial, s
 
 No Brasil a taxa de mortalidade no trânsito era de 20% por 100.000 habitante e segundo o site do CNJ: https://www.cnt.org.br/agencia-cnt/cnt-lanca-painel-sobre-acidentes-rodoviarios-veja-principais-dados " O Brasil registra 14 mortes nas rodovias federais a cada dia". Dados alarmantes que motivaram a escolha desse tema e subtema. 
 
+## Motivação
 
 ## Objetivos 
 
@@ -36,6 +37,10 @@ O aplicativo shiny conta também com um mapa do Brasil em que pode-se examinar c
  Dados sobre mortalidade do DataSus: http://tabnet.datasus.gov.br/cgi/tabcgi.exe?sim/cnv/ext10uf.def
 
  Dados sobre os acidentes de trânsito da Polícia Federal:  https://portal.prf.gov.br/dados-abertos-acidentes 
+
+## Software
+
+##### Pacotes
 
 
 ## Limitações
