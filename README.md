@@ -38,10 +38,6 @@ O aplicativo shiny conta também com um mapa do Brasil em que pode-se examinar c
 
  Dados sobre os acidentes de trânsito da Polícia Federal:  https://portal.prf.gov.br/dados-abertos-acidentes 
 
-## Software
-
-##### Pacotes
-
 
 ## Limitações
 Disponibilidade de banco de dados consistentes e que abranjam todas as variáveis relacionadas ao trânsito e qualidade desses bancos. 
@@ -73,4 +69,7 @@ CNT lança painel sobre acidentes rodoviários; veja os principais dados: [link]
 
 ## Orientador
 1. prof. David Duarte Lima
+
+##Video 
+https://www.youtube.com/watch?v=sSH23LcIR3Q
 
